@@ -1,21 +1,21 @@
 # MusicWear Companion 📱
-<!-- Test 2 -->
+
 A sleek, Samsung-inspired media manager and music player for Android, built with modern Jetpack Compose. Designed to function seamlessly as a standalone player on your phone or as an optional companion app to sync and manage music on your **MusicWear** Wear OS device.
 
 ---
 ### DISCLAIMER
-**APP IS IN DEVELOPMENT -- PLACE HOLDER THIS IS JUST A COPY OF MY OTHER MD FROM MY OTHER REPO SLIGHTLY MODIFIED, BUILD INSTRUCTIONS NOT COMPLETE**
-* *PLACEHOLDER*
+**APP IS IN DEVELOPMENT -- MOSTLY FINISHED NOW**
+* *IDK WHAT WAS SUPPOSED TO BE HERE LOL*
 
 ---
 ## ✨ Features
 
 * **Sleek Design:** Will be intuitive, Samsung-inspired user interface built with Jetpack Compose.
 * **Dual Functionality:** Will work fully as a standalone phone player or as an optional companion.
-* **[IN DEVELOPMENT]** 
-* **[IN DEVELOPMENT]** 
-* **[IN DEVELOPMENT]** 
-* **Future-Proof:** Will be built on modern Android APIs for high efficiency and long-term compatibility.
+* **Has ability to shuffle** 
+* **Ability to show song art & info** 
+* **Ability to reorder songs when shuffled or normally playing them** 
+* **Future-Proof:** Built on modern Android APIs for high efficiency and long-term compatibility.
 
 ---
 
@@ -34,15 +34,13 @@ To get the best performance, it is highly recommended to build and run the app i
 ---
 
 ### Prerequisites
-* TBD
-* [Android Studio Koala](https://developer.android.com/studio) or newer.
+* sanity + maybe a watch if you want to fully use all features
+* [Android Studio place (checking)](https://developer.android.com/studio) or newer.
 * Android SDK Platform 30+.
 
 ---
 
 ### Build Steps
-TBD
-
 1. **Clone the repository.**
 2. **Open the project** in Android Studio and allow Gradle to sync.
 3. **Select the Build Variant:**
@@ -54,7 +52,6 @@ TBD
 
 ---
 ### Build Steps w/out Android Studio:
-TBD
 
 1. **Clone the repo either by downloading here, or by running:**
 ```bash
@@ -82,7 +79,6 @@ chmod +x gradlew
 ---
 
 ### Installation
-TBD
 
 Connect your phone via ADB and run:
 ```bash
