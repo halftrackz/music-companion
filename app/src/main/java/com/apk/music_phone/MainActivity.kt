@@ -113,7 +113,10 @@ class MainActivity : ComponentActivity() {
                     onSelectTab = { viewModel.selectTab(it) },
                     onRefreshNodes = { viewModel.refreshWatchNodes() },
                     onSelectNode = { viewModel.selectNode(it) },
-                    onPlayTrack = { viewModel.playPhoneTrack(it) },
+                    onPlayTrack = { track ->
+                        viewModel.playPhoneTrack(track)
+                        showFullPlayer = true
+                    },
                     onTogglePlayPause = { viewModel.togglePlayerPlayPause() },
                     onSkipNext = { viewModel.skipPlayerNext() },
                     onClickMiniPlayer = { showFullPlayer = true },
@@ -143,7 +146,10 @@ class MainActivity : ComponentActivity() {
                         onSkipPrevious = { viewModel.skipPlayerPrevious() },
                         onSeekTo = { viewModel.seekPlayerTo(it) },
                         onToggleShuffle = { viewModel.togglePlayerShuffle() },
-                        onToggleRepeat = { viewModel.togglePlayerRepeat() }
+                        onToggleRepeat = { viewModel.togglePlayerRepeat() },
+                        onMoveQueueItemUp = { viewModel.moveQueueItemUp(it) },
+                        onMoveQueueItemDown = { viewModel.moveQueueItemDown(it) },
+                        onPlayTrack = { viewModel.playPhoneTrack(it) }
                     )
                 }
             }

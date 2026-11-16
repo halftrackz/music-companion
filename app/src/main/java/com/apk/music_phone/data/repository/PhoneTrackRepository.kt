@@ -25,7 +25,6 @@ class PhoneTrackRepository(private val context: Context) {
         filePath: String,
         relativePath: String,
     ): Boolean {
-        // IGNORE .OGG AND AUDIO/OGG FILES
         if (fileName.endsWith(".ogg", ignoreCase = true) || mimeType.contains("ogg", ignoreCase = true)) {
             return true
         }
@@ -58,6 +57,7 @@ class PhoneTrackRepository(private val context: Context) {
             MediaStore.Audio.Media.TITLE,
             MediaStore.Audio.Media.ARTIST,
             MediaStore.Audio.Media.ALBUM,
+            MediaStore.Audio.Media.YEAR,
             MediaStore.Audio.Media.DURATION,
             MediaStore.Audio.Media.SIZE,
             MediaStore.Audio.Media.DISPLAY_NAME,
@@ -86,6 +86,7 @@ class PhoneTrackRepository(private val context: Context) {
                 val titleColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE)
                 val artistColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST)
                 val albumColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM)
+                val yearColumn = cursor.getColumnIndex(MediaStore.Audio.Media.YEAR)
                 val durationColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION)
                 val sizeColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.SIZE)
                 val displayNameColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DISPLAY_NAME)
@@ -101,6 +102,7 @@ class PhoneTrackRepository(private val context: Context) {
                     val title = cursor.getString(titleColumn) ?: "Unknown Title"
                     val artist = cursor.getString(artistColumn) ?: "Unknown Artist"
                     val album = cursor.getString(albumColumn) ?: "Unknown Album"
+                    val year = if (yearColumn >= 0) cursor.getInt(yearColumn) else 0
                     val duration = cursor.getLong(durationColumn)
                     val size = cursor.getLong(sizeColumn)
                     val displayName = cursor.getString(displayNameColumn) ?: "$title.mp3"
@@ -134,6 +136,7 @@ class PhoneTrackRepository(private val context: Context) {
                             title = if (title.isBlank() || title == "Unknown Title") displayName.substringBeforeLast(".") else title,
                             artist = if (artist == "<unknown>" || artist.isBlank()) "Unknown Artist" else artist,
                             album = if (album == "<unknown>" || album.isBlank()) "Unknown Album" else album,
+                            year = year,
                             durationMs = duration,
                             sizeBytes = size,
                             fileName = displayName,
@@ -156,7 +159,6 @@ class PhoneTrackRepository(private val context: Context) {
     private fun scanMusicDirectoryFallback(trackList: MutableList<PhoneTrack>) {
         val musicDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)
         if (musicDir != null && musicDir.exists() && musicDir.isDirectory) {
-            // "ogg" has been removed from supported extensions
             val supportedExtensions = setOf("mp3", "m4a", "flac", "wav", "aac", "wma", "opus", "m4p", "mp4")
             val existingFileNames = trackList.map { it.fileName.lowercase() }.toSet()
 
@@ -172,6 +174,7 @@ class PhoneTrackRepository(private val context: Context) {
                                     title = file.nameWithoutExtension,
                                     artist = "Local Music",
                                     album = file.parentFile?.name ?: "Music",
+                                    year = 0,
                                     durationMs = 0L,
                                     sizeBytes = file.length(),
                                     fileName = file.name,
@@ -189,7 +192,7 @@ class PhoneTrackRepository(private val context: Context) {
     fun searchTracks(query: String, tracks: List<PhoneTrack>): List<PhoneTrack> {
         if (query.isBlank()) return tracks
         val lower = query.lowercase().trim()
-        return tracks.filter { (title, artist, album, _, _, _, fileName) ->
+        return tracks.filter { (title, artist, album, _, _, _, _, fileName) ->
             title.lowercase().contains(lower) ||
                     artist.lowercase().contains(lower) ||
                     album.lowercase().contains(lower) ||

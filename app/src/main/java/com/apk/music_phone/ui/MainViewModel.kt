@@ -151,6 +151,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         audioPlayer.toggleRepeat()
     }
 
+    fun moveQueueItemUp(index: Int) {
+        audioPlayer.moveQueueItemUp(index)
+    }
+
+    fun moveQueueItemDown(index: Int) {
+        audioPlayer.moveQueueItemDown(index)
+    }
+
     fun onSearchQueryChanged(query: String) {
         val filtered = phoneTrackRepository.searchTracks(query, _uiState.value.phoneTracks)
         _uiState.update {

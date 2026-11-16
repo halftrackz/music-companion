@@ -57,6 +57,9 @@ dependencies {
     implementation(libs.lifecycle.runtime.compose)
     implementation(libs.lifecycle.viewmodel.compose)
 
+    // MediaSession & Media Notification
+    implementation("androidx.media:media:1.7.0")
+
     // Wearable Data Layer
     implementation(libs.play.services.wearable)
     implementation(libs.kotlinx.coroutines.play.services)

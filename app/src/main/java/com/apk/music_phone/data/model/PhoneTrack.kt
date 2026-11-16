@@ -7,6 +7,7 @@ data class PhoneTrack(
     val title: String,
     val artist: String,
     val album: String,
+    val year: Int = 0,
     val durationMs: Long,
     val sizeBytes: Long,
     val fileName: String,
