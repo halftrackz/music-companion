@@ -35,7 +35,7 @@ To get the best performance, it is highly recommended to build and run the app i
 
 ### Prerequisites
 * sanity + maybe a watch if you want to fully use all features
-* [Android Studio place (checking)](https://developer.android.com/studio) or newer.
+* [Android Studio rabbit 2 patch 1](https://developer.android.com/studio) or newer.
 * Android SDK Platform 30+.
 
 ---
