@@ -1,5 +1,5 @@
 # MusicWear Companion 📱
-
+<!-- Test -->
 A sleek, Samsung-inspired media manager and music player for Android, built with modern Jetpack Compose. Designed to function seamlessly as a standalone player on your phone or as an optional companion app to sync and manage music on your **MusicWear** Wear OS device.
 
 ---
